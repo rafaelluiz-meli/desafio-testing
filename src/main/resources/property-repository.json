@@ -4,9 +4,7 @@
     "name": "Casa de campo",
     "district": {
       "name":"Osasco",
-      "valuePerSquareMeter": 1000,
-      "length": 10.0,
-      "width":10.0
+      "valuePerSquareMeter": 1000
     },
     "roomList": [
       {
