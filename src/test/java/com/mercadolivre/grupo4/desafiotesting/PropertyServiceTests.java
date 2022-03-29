@@ -1,5 +1,8 @@
 package com.mercadolivre.grupo4.desafiotesting;
 
+import com.mercadolivre.grupo4.desafiotesting.model.District;
+import com.mercadolivre.grupo4.desafiotesting.model.Property;
+import com.mercadolivre.grupo4.desafiotesting.model.Room;
 import com.mercadolivre.grupo4.desafiotesting.repository.IPropertyRepository;
 import com.mercadolivre.grupo4.desafiotesting.service.PropertyService;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,8 +15,12 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PropertyServiceTests {
@@ -31,5 +38,26 @@ public class PropertyServiceTests {
     @Test
     public void firstTest() {
         assertTrue(true);
+    }
+
+    @Test
+    public void shouldReturnBigRoom(){
+        //Arrange (Preparar)
+        District district = new District("Osasco", new BigDecimal(300.00));
+
+        Room room1 = new Room("Quarto", 10.00,10.00);
+        Room room2 = new Room("Sala", 20.00, 10.00);
+        Room room3 = new Room("Banheiro", 5.00, 6.00);
+
+        List<Room> rooms = new ArrayList<>(Arrays.asList(room1,room2, room3));
+
+        Property property = new Property(1L,"Apartamento", district, rooms);
+
+        //Act(Executar)
+
+            Room bigRoom = propertyService.biggestRoom(property.getRoomList());
+
+        //Assert(Verificar)
+            assertEquals(room2, bigRoom);
     }
 }
