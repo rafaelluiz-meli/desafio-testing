@@ -15,10 +15,10 @@ import java.util.List;
 public class PropertyService {
     private final IPropertyRepository propertyRepository;
 
-    public BigDecimal getValue(Long id) {
-        Property property = propertyRepository.findById(id);
-        District district = property.getDistrict();
-        return null;
+    public BigDecimal calculatePropertyValue(Long id) {
+        District district = propertyRepository.findById(id).getDistrict();
+        BigDecimal propertyValue = BigDecimal.valueOf(totalArea(id)).multiply(district.getValuePerSquareMeter());
+        return propertyValue;
     }
 
     public Double totalArea(long propertyId) {

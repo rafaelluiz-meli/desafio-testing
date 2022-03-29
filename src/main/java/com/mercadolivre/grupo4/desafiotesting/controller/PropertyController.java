@@ -21,9 +21,9 @@ public class PropertyController {
     }
 
     @GetMapping(path = "value/{propId}")
-    public ResponseEntity<BigDecimal> getPropertyValue(@PathVariable Long propId){
-        BigDecimal result = propertyService.getValue(propId);
-        return ResponseEntity.ok().body(result);
+    public ResponseEntity<BigDecimal> getPropertyValue(@PathVariable Long propertyId){
+        BigDecimal propertyValue = propertyService.calculatePropertyValue(propertyId);
+        return ResponseEntity.ok().body(propertyValue);
     }
     @GetMapping("/getTotalArea/{propertyId}")
     public ResponseEntity<Double> getTotalArea(@PathVariable Long propertyId) {
