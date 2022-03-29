@@ -1,5 +1,6 @@
 package com.mercadolivre.grupo4.desafiotesting.service;
 
+import com.mercadolivre.grupo4.desafiotesting.model.Property;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
 import com.mercadolivre.grupo4.desafiotesting.repository.IPropertyRepository;
 import com.mercadolivre.grupo4.desafiotesting.repository.PropertyRepository;
@@ -13,21 +14,25 @@ import java.util.List;
 public class PropertyService {
     private final IPropertyRepository propertyRepository;
 
-    public Room biggestRoom(List<Room> roomList) {
+    public Room biggestRoom(Long id) {
+
+        Property property = propertyRepository.findById(id);
+
         Double squareSize = 0.0;
         Double tempSquareSize;
+        List<Room> rooms = property.getRoomList();
         Room bigRoom = new Room();
 
-        for(int i = 0; i < roomList.size();i++){
-            tempSquareSize = roomList.get(i).squareMeters();
+        for (int i = 0; i < rooms.size(); i++) {
+            tempSquareSize = rooms.get(i).squareMeters();
 
-            if(tempSquareSize > squareSize){
+            if (tempSquareSize > squareSize) {
                 squareSize = tempSquareSize;
-                bigRoom = roomList.get(i);
+                bigRoom = rooms.get(i);
             }
         }
 
-        return  bigRoom;
+        return bigRoom;
     }
 }
 
