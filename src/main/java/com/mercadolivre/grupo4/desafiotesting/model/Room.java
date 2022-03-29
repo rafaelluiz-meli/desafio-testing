@@ -4,12 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.*;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Room {
+    @NotBlank(message = "O campo não pode estar vazio.")
+    @Pattern(regexp="(([A-Z][a-záàâãéèêíïóôõöúçñ]+)\\s).+", message = "O campo deve começar com uma letra maiúscula.")
+    @Size(max = 30, message = "O comprimento do cômodo não pode exceder 30 caracteres.")
     private String name;
+
+    @NotNull(message = "A largura do cômodo não pode estar vazia.")
+    @Max(value = 25, message = "A largura máxima permitida por cômodo é de 25 metros.")
     private Double width;
+    @NotNull(message = "O comprimento do cômodo não pode estar vazia")
+    @Max(value = 33, message = "O comprimento máximo permitido por cômodo é de 33 metros.")
     private Double length;
 
     public Double squareMeters() {
