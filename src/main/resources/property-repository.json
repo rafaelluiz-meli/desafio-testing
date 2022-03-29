@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Casa de campo",
+    "district": {
+      "name":"Osasco",
+      "valuePerSquareMeter": 1000,
+      "length": 10.0,
+      "width":10.0
+    },
+    "roomList": [
+      {
+        "name": "quarto",
+        "width": 10.0,
+        "length": 10.0
+      },
+      {
+        "name": "cozinha",
+        "width": 10.0,
+        "length": 10.0
+      }
+    ]
+  }
+]
