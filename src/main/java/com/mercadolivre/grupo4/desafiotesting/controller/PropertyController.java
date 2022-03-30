@@ -5,6 +5,8 @@ import com.mercadolivre.grupo4.desafiotesting.service.PropertyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,12 @@ public class PropertyController {
     public ResponseEntity<Double> getTotalArea(@PathVariable Long propertyId) {
         Double totalArea = propertyService.calculateTotalArea(propertyId);
         return ResponseEntity.ok().body(totalArea);
+    }
+
+    @GetMapping("/allRoomsArea/{propertyId}")
+    public ResponseEntity<List<Room>> getAllRoomsArea(@PathVariable Long propertyId) {
+        List<Room> roomList = propertyService.calculateAllRoomArea(propertyId);
+        return ResponseEntity.ok().body(roomList);
     }
 
 }

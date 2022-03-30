@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -34,6 +35,15 @@ public class PropertyService {
         Property property = propertyRepository.findById(propertyId);
         Room biggestRoom = property.getRoomList().stream().max(Comparator.comparing(Room::squareMeters)).get();
         return biggestRoom;
+    }
+
+    public List<Room> calculateAllRoomArea(long propertyId) {
+        Property property = propertyRepository.findById(propertyId);
+        property.getRoomList().forEach(
+                room -> room.setArea(room.squareMeters())
+        );
+
+        return property.getRoomList();
     }
 }
 

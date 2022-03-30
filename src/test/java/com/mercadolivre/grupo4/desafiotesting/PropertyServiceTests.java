@@ -127,5 +127,29 @@ public class PropertyServiceTests {
         //Assert(Verificar)
         assertNotEquals(room1, biggestRoom);
     }
+
+    @Test
+    @DisplayName("Should return a list with rooms and its size")
+    public void shouldReturnAListWithRoomsWithSize() {
+        //Arrange (Preparar)
+        District district = new District("Osasco", new BigDecimal(300.00));
+        Room room1 = new Room("Quarto", 10.00,10.00);
+        Room room2 = new Room("Sala", 20.00, 10.00);
+        Room room3 = new Room("Banheiro", 5.00, 6.00);
+
+        List<Room> rooms = new ArrayList<>(Arrays.asList(room1,room2, room3));
+
+        Property property = new Property(1L,"Apartamento", district, rooms);
+
+        //Act(Executar)
+        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        List<Room> roomsWithCalculatedArea = propertyService.calculateAllRoomArea(anyLong());
+
+        //Assert(Verificar)
+        assertEquals(roomsWithCalculatedArea.get(0).getArea(), 100);
+        assertEquals(roomsWithCalculatedArea.get(1).getArea(), 200);
+        assertEquals(roomsWithCalculatedArea.get(2).getArea(), 30);
+
+    }
     
 }
