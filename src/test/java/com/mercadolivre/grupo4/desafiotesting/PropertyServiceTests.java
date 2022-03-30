@@ -13,14 +13,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-
-
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class PropertyServiceTests {
@@ -33,11 +32,6 @@ public class PropertyServiceTests {
     @BeforeEach
     public void init() {
         propertyService = new PropertyService(propertyRepository);
-    }
-
-    @Test
-    public void firstTest() {
-        assertTrue(true);
     }
 
     @Test
@@ -86,21 +80,52 @@ public class PropertyServiceTests {
         Mockito.when(propertyRepository.findById(any())).thenReturn(property);
 
         //Exec: Excutar o método que iremos testar.
-        Double result = propertyService.totalArea(1L);
+        Double result = propertyService.calculateTotalArea(1L);
 
         //Assert: Verificar resultados.
         assertEquals(350, result);
     }
 
-    @Test
-    @DisplayName("Should throw error when property does not exist.")
-    public void nonExistentPropertyAreaCalculator() {
-        //Setup: Configurar o que o teste precisa para rodar.
+    @DisplayName("Should return the biggest room")
+    public void shouldReturnBiggestRoom(){
+        //Arrange (Preparar)
+        District district = new District("Osasco", new BigDecimal(300.00));
 
-        //Exec: Excutar o método que iremos testar.
-        RuntimeException e = assertThrows(RuntimeException.class, () -> propertyService.totalArea(any()), "Should throw RuntimeException.");
+        Room room1 = new Room("Quarto", 10.00,10.00);
+        Room room2 = new Room("Sala", 20.00, 10.00);
+        Room room3 = new Room("Banheiro", 5.00, 6.00);
 
-        //Assert: Verificar resultados.
-        assertTrue(e.getMessage().contains("Propriedade não existe."));
+        List<Room> rooms = new ArrayList<>(Arrays.asList(room1,room2, room3));
+
+        Property property = new Property(1L,"Apartamento", district, rooms);
+
+        //Act(Executar)
+        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        Room biggestRoom = propertyService.findBiggestRoom(anyLong());
+
+        //Assert(Verificar)
+        assertEquals(room2, biggestRoom);
     }
+
+    @Test
+    @DisplayName("Should not return the biggest room")
+    public void shouldNotReturnBiggestRoom(){
+        //Arrange (Preparar)
+        District district = new District("Osasco", new BigDecimal(300.00));
+        Room room1 = new Room("Quarto", 10.00,10.00);
+        Room room2 = new Room("Sala", 20.00, 10.00);
+        Room room3 = new Room("Banheiro", 5.00, 6.00);
+
+        List<Room> rooms = new ArrayList<>(Arrays.asList(room1,room2, room3));
+
+        Property property = new Property(1L,"Apartamento", district, rooms);
+
+        //Act(Executar)
+        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        Room biggestRoom = propertyService.findBiggestRoom(anyLong());
+
+        //Assert(Verificar)
+        assertNotEquals(room1, biggestRoom);
+    }
+    
 }
