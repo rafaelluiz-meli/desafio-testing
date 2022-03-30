@@ -3,12 +3,12 @@ package com.mercadolivre.grupo4.desafiotesting.controller;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
 import com.mercadolivre.grupo4.desafiotesting.service.PropertyService;
 import lombok.AllArgsConstructor;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.ResponseEntity;
+import java.math.BigDecimal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 @RestController
 @RequestMapping("/property")
@@ -16,15 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class PropertyController {
     private final PropertyService propertyService;
 
-    @GetMapping("/biggestRoom/{id}")
-    public Room biggestRoom(@PathVariable Long id) {
-        Room room = propertyService.biggestRoom(id);
-        return room;
+    @GetMapping("/biggestRoom/{propertyId}")
+    public ResponseEntity<Room> biggestRoom(@PathVariable Long propertyId) {
+        Room room = propertyService.findBiggestRoom(propertyId);
+        return ResponseEntity.ok().body(room);
     }
 
-    @GetMapping
-    public String helloWorld() {
-        return "Hello world";
+    @GetMapping("/value/{propertyId}")
+    public ResponseEntity<BigDecimal> getPropertyValue(@PathVariable Long propertyId){
+        BigDecimal propertyValue = propertyService.calculatePropertyValue(propertyId);
+        return ResponseEntity.ok().body(propertyValue);
+    }
+    @GetMapping("/totalArea/{propertyId}")
+    public ResponseEntity<Double> getTotalArea(@PathVariable Long propertyId) {
+        Double totalArea = propertyService.calculateTotalArea(propertyId);
+        return ResponseEntity.ok().body(totalArea);
     }
 
 }
