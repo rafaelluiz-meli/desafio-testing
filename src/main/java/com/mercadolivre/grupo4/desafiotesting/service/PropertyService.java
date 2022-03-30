@@ -20,7 +20,7 @@ public class PropertyService {
 
     public BigDecimal calculatePropertyValue(Long propertyId) {
         District district = propertyRepository.findById(propertyId).getDistrict();
-        BigDecimal propertyValue = BigDecimal.valueOf(totalArea(propertyId)).multiply(district.getValuePerSquareMeter());
+        BigDecimal propertyValue = BigDecimal.valueOf(calculateTotalArea(propertyId)).multiply(district.getValuePerSquareMeter());
         return propertyValue;
     }
 
