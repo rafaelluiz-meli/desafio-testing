@@ -1,17 +1,14 @@
 package com.mercadolivre.grupo4.desafiotesting.service;
 
 import com.mercadolivre.grupo4.desafiotesting.model.District;
+import com.mercadolivre.grupo4.desafiotesting.repository.IPropertyRepository;
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
-import com.mercadolivre.grupo4.desafiotesting.repository.IPropertyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor

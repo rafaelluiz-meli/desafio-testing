@@ -1,4 +1,4 @@
-package com.mercadolivre.grupo4.desafiotesting;
+package com.mercadolivre.grupo4.desafiotesting.unit;
 
 import com.mercadolivre.grupo4.desafiotesting.model.District;
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
