@@ -7,7 +7,9 @@ import com.mercadolivre.grupo4.desafiotesting.repository.PropertyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -18,21 +20,7 @@ public class PropertyService {
 
         Property property = propertyRepository.findById(id);
 
-        Double squareSize = 0.0;
-        Double tempSquareSize;
-        List<Room> rooms = property.getRoomList();
-        Room bigRoom = new Room();
-
-        for (int i = 0; i < rooms.size(); i++) {
-            tempSquareSize = rooms.get(i).squareMeters();
-
-            if (tempSquareSize > squareSize) {
-                squareSize = tempSquareSize;
-                bigRoom = rooms.get(i);
-            }
-        }
-
-        return bigRoom;
+        return property.getRoomList().stream().max(Comparator.comparing(Room::squareMeters)).get();
     }
 }
 
