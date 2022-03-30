@@ -58,6 +58,23 @@ public class PropertyServiceTests {
     }
 
     @Test
+    @DisplayName("Should return true if the calculus is wrong")
+    public void calculatePropertyValueWrong(){
+        // Arrange
+        Room room = new Room("Cozinha", 10.0, 10.0);
+        Room room1 = new Room("Banheiro", 5.0, 5.0);
+        Room room2 = new Room("Quarto", 15.0, 15.0);
+        Property property = new Property(1L, "Mansao",
+                new District("Embu",BigDecimal.valueOf(0)),
+                Arrays.asList(room, room1, room2));
+        // Act
+        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        BigDecimal propertyValue = propertyService.calculatePropertyValue(anyLong());
+        // Assert
+        assertNotEquals(propertyValue,BigDecimal.valueOf(35000.0));
+    }
+
+    @Test
     @DisplayName("Should calculate property area.")
     public void totalAreaCalculator() {
         //Setup: Configurar o que o teste precisa para rodar.
