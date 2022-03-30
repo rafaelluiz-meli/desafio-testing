@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 
 import java.math.BigDecimal;
@@ -40,6 +41,23 @@ public class PropertyServiceTests {
     }
 
     @Test
+    @DisplayName("Should calculate property value")
+    public void calculatePropertyValue(){
+        // Arrange
+        Room room = new Room("Cozinha", 10.0, 10.0);
+        Room room1 = new Room("Banheiro", 5.0, 5.0);
+        Room room2 = new Room("Quarto", 15.0, 15.0);
+        Property property = new Property(1L, "Mansao",
+                new District("Embu",BigDecimal.valueOf(100)),
+                Arrays.asList(room, room1, room2));
+        // Act
+        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        BigDecimal propertyValue = propertyService.calculatePropertyValue(anyLong());
+        // Assert
+        assertEquals(propertyValue,BigDecimal.valueOf(35000.0));
+    }
+
+    @Test
     @DisplayName("Should calculate property area.")
     public void totalAreaCalculator() {
         //Setup: Configurar o que o teste precisa para rodar.
@@ -55,8 +73,6 @@ public class PropertyServiceTests {
 
         //Assert: Verificar resultados.
         assertEquals(350, result);
-
-
     }
 
     @Test
@@ -69,9 +85,5 @@ public class PropertyServiceTests {
 
         //Assert: Verificar resultados.
         assertTrue(e.getMessage().contains("Propriedade não existe."));
-
-
-
     }
-
 }

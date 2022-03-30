@@ -10,6 +10,7 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Room {
+    @NotEmpty
     @NotBlank(message = "O campo não pode estar vazio.")
     @Pattern(regexp="(([A-Z][a-záàâãéèêíïóôõöúçñ]+)\\s).+", message = "O campo deve começar com uma letra maiúscula.")
     @Size(max = 30, message = "O comprimento do cômodo não pode exceder 30 caracteres.")
