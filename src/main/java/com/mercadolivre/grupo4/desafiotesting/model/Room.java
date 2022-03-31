@@ -4,12 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Room {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotEmpty
     @NotBlank(message = "O campo não pode estar vazio.")
     @Pattern(regexp="(([A-Z][a-záàâãéèêíïóôõöúçñ]+)\\s).+", message = "O campo deve começar com uma letra maiúscula.")

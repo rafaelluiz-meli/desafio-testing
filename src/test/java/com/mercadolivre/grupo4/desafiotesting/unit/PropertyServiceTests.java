@@ -35,7 +35,7 @@ public class PropertyServiceTests {
     }
 
     // arrange
-    final District district = new District("Osasco", new BigDecimal(300.00));
+    final District district = new District(1L, "Osasco", new BigDecimal(300.00));
     final Room room1 = new Room("Quarto", 10.00,10.00);
     final Room room2 = new Room("Sala", 20.00, 10.00);
     final Room room3 = new Room("Banheiro", 5.00, 6.00);
