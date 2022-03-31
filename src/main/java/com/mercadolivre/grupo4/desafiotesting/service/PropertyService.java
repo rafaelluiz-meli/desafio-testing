@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Comparator;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class PropertyService {
         Double totalArea = property.getRoomList().stream().map(Room::squareMeters).reduce(0.0, Double::sum);
         return totalArea;
     }
-  
+
     public Room findBiggestRoom(Long propertyId) {
         Property property = propertyRepository.findById(propertyId).get();
         Room biggestRoom = property.getRoomList().stream().max(Comparator.comparing(Room::squareMeters)).get();
@@ -35,17 +36,30 @@ public class PropertyService {
     }
 
     public List<Room> calculateAllRoomArea(long propertyId) {
-        Property property = propertyRepository.findById(propertyId).get();
-        property.getRoomList().forEach(
-                room -> room.setArea(room.squareMeters())
-        );
 
-        return property.getRoomList();
+        Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
+        if(propertyOptional.isPresent()) {
+            Property property = propertyOptional.get();
+            property.getRoomList().forEach(
+                    room -> room.setArea(room.squareMeters())
+            );
+
+            return property.getRoomList();
+        }
+
+
+        return null;
     }
 
     public Property createProperty(Property property) {
-        Property addedProperty = propertyRepository.save(property);
-        return addedProperty;
+        return propertyRepository.save(property);
+    }
+
+    public Property findProperty(Long propertyId) {
+        Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
+
+        return propertyOptional.orElse(null);
+
     }
 }
 

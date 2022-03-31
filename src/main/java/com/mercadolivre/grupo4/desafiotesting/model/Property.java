@@ -18,12 +18,11 @@ public class Property {
     private Long id;
     // TODO: 29/03/22 Improve regex for capital letters only
     @NotBlank(message = "O nome da propriedade não pode estar vazio.")
-    @Pattern(regexp="(([A-Z][a-záàâãéèêíïóôõöúçñ]+)\\s).+", message = "O nome da propriedade deve começar com uma letra maiúscula.")
+//    @Pattern(regexp="(([A-Z][a-záàâãéèêíïóôõöúçñ]+)\\s).+", message = "O nome da propriedade deve começar com uma letra maiúscula.")
     @Size(max = 30, message = "O comprimento do nome não pode exceder 30 caracteres.")
     private String name;
 
-    @ManyToOne
-    @NotBlank
+    @ManyToOne(cascade = CascadeType.ALL)
     private District district;
 
 

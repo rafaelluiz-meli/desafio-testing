@@ -19,12 +19,12 @@ public class District {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome do bairro não pode estar vazio.")
-    @Size(max = 45, message = "O comprimento do bairro não pode exceder 45 caracteres.")
+//    @NotBlank(message = "O nome do bairro não pode estar vazio.")
+//    @Size(max = 45, message = "O comprimento do bairro não pode exceder 45 caracteres.")
 //    @Column(name = "districtName")
     private String name;
 
-    @NotBlank(message = "Valor do metro quadrado do bairro não pode estar vazio.")
+//    @NotBlank(message = "Valor do metro quadrado do bairro não pode estar vazio.")
 //    @DecimalMax(value = "9999999999999", message = "O comprimento do valor por metro quadrado não deve exceder 13 dígitos")
     private BigDecimal valuePerSquareMeter;
 

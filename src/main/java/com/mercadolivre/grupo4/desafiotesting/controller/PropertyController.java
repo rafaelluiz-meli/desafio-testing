@@ -41,7 +41,14 @@ public class PropertyController {
 
     @PostMapping
     public ResponseEntity<Property> createProperty(@RequestBody Property property) {
-        return null;
+        Property addedProperty = propertyService.createProperty(property);
+        return ResponseEntity.ok().body(addedProperty);
+    }
+
+    @GetMapping("/{propertyId}")
+    public ResponseEntity<Property> listAllProperties(@PathVariable Long propertyId) {
+        Property foundProperty = propertyService.findProperty(propertyId);
+        return ResponseEntity.ok().body(foundProperty);
     }
 
 }
