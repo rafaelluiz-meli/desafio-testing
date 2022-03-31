@@ -1,7 +1,6 @@
 package com.mercadolivre.grupo4.desafiotesting.service;
 
 import com.mercadolivre.grupo4.desafiotesting.model.District;
-import com.mercadolivre.grupo4.desafiotesting.repository.IPropertyRepository;
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
 import com.mercadolivre.grupo4.desafiotesting.repository.PropertyRepository;
@@ -14,29 +13,29 @@ import java.util.Comparator;
 @Service
 @AllArgsConstructor
 public class PropertyService {
-    private final IPropertyRepository propertyRepository;
+    private final PropertyRepository propertyRepository;
 
 
     public BigDecimal calculatePropertyValue(Long propertyId) {
-        District district = propertyRepository.findById(propertyId).getDistrict();
+        District district = propertyRepository.findById(propertyId).get().getDistrict();
         BigDecimal propertyValue = BigDecimal.valueOf(calculateTotalArea(propertyId)).multiply(district.getValuePerSquareMeter());
         return propertyValue;
     }
 
     public Double calculateTotalArea(long propertyId) {
-        Property property = propertyRepository.findById(propertyId);
+        Property property = propertyRepository.findById(propertyId).get();
         Double totalArea = property.getRoomList().stream().map(Room::squareMeters).reduce(0.0, Double::sum);
         return totalArea;
     }
   
     public Room findBiggestRoom(Long propertyId) {
-        Property property = propertyRepository.findById(propertyId);
+        Property property = propertyRepository.findById(propertyId).get();
         Room biggestRoom = property.getRoomList().stream().max(Comparator.comparing(Room::squareMeters)).get();
         return biggestRoom;
     }
 
     public List<Room> calculateAllRoomArea(long propertyId) {
-        Property property = propertyRepository.findById(propertyId);
+        Property property = propertyRepository.findById(propertyId).get();
         property.getRoomList().forEach(
                 room -> room.setArea(room.squareMeters())
         );
@@ -45,7 +44,7 @@ public class PropertyService {
     }
 
     public Property createProperty(Property property) {
-        Property addedProperty = propertyRepository.add(property);
+        Property addedProperty = propertyRepository.save(property);
         return addedProperty;
     }
 }

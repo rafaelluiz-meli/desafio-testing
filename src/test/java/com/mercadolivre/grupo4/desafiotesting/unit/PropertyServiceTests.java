@@ -3,7 +3,7 @@ package com.mercadolivre.grupo4.desafiotesting.unit;
 import com.mercadolivre.grupo4.desafiotesting.model.District;
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
-import com.mercadolivre.grupo4.desafiotesting.repository.IPropertyRepository;
+import com.mercadolivre.grupo4.desafiotesting.repository.PropertyRepository;
 import com.mercadolivre.grupo4.desafiotesting.service.PropertyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +24,7 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class PropertyServiceTests {
     @Mock
-    IPropertyRepository propertyRepository;
+    PropertyRepository propertyRepository;
 
     @InjectMocks
     PropertyService propertyService;
@@ -48,7 +48,7 @@ public class PropertyServiceTests {
     public void calculatePropertyValue(){
 
         // Act
-        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        Mockito.when(propertyRepository.findById(anyLong()).get()).thenReturn(property);
         BigDecimal propertyValue = propertyService.calculatePropertyValue(anyLong());
         // Assert
         assertEquals(BigDecimal.valueOf(99000.0),propertyValue);
@@ -59,7 +59,7 @@ public class PropertyServiceTests {
     public void calculatePropertyValueWrong(){
 
         // Act
-        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        Mockito.when(propertyRepository.findById(anyLong()).get()).thenReturn(property);
         BigDecimal propertyValue = propertyService.calculatePropertyValue(anyLong());
         // Assert
         assertNotEquals(BigDecimal.valueOf(30000.0),propertyValue);
@@ -69,7 +69,7 @@ public class PropertyServiceTests {
     @DisplayName("Should calculate property area.")
     public void totalAreaCalculator() {
 
-        Mockito.when(propertyRepository.findById(any())).thenReturn(property);
+        Mockito.when(propertyRepository.findById(any()).get()).thenReturn(property);
 
         //Exec: Excutar o método que iremos testar.
         Double result = propertyService.calculateTotalArea(1L);
@@ -82,7 +82,7 @@ public class PropertyServiceTests {
     public void shouldReturnBiggestRoom(){
 
         //Act(Executar)
-        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        Mockito.when(propertyRepository.findById(anyLong()).get()).thenReturn(property);
         Room biggestRoom = propertyService.findBiggestRoom(anyLong());
 
         //Assert(Verificar)
@@ -94,7 +94,7 @@ public class PropertyServiceTests {
     public void shouldNotReturnBiggestRoom(){
 
         //Act(Executar)
-        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        Mockito.when(propertyRepository.findById(anyLong()).get()).thenReturn(property);
         Room biggestRoom = propertyService.findBiggestRoom(anyLong());
 
         //Assert(Verificar)
@@ -106,7 +106,7 @@ public class PropertyServiceTests {
     public void shouldReturnAListWithRoomsWithSize() {
 
         //Act(Executar)
-        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(property);
+        Mockito.when(propertyRepository.findById(anyLong()).get()).thenReturn(property);
         List<Room> roomsWithCalculatedArea = propertyService.calculateAllRoomArea(anyLong());
 
         //Assert(Verificar)
@@ -120,7 +120,7 @@ public class PropertyServiceTests {
     public void shouldCreateAProperty(){
 
         //Act(Executar)
-        Mockito.when(propertyRepository.add(any())).thenReturn(property);
+        Mockito.when(propertyRepository.save(any())).thenReturn(property);
         Property savingProperty = propertyService.createProperty(any());
 
         //Assert(Verificar)
