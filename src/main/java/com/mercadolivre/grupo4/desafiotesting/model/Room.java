@@ -18,9 +18,9 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "property_id")
-    @ManyToOne(targetEntity = Property.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Property property;
+//    @ManyToOne(targetEntity = Property.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "PROPERTY_ID",insertable = false, updatable = false)
+    private Long property;
 
     @NotEmpty
     @NotBlank(message = "O campo não pode estar vazio.")

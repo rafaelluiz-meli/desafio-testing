@@ -26,7 +26,7 @@ public class Property {
     private District district;
 
 
-    @NotEmpty(message = "Room list should not be empty")
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Room> roomList;
+//    @NotEmpty(message = "Room list should not be empty")
+//    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Room> roomList;
 }
