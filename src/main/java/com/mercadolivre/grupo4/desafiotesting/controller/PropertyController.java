@@ -1,5 +1,6 @@
 package com.mercadolivre.grupo4.desafiotesting.controller;
 
+import com.mercadolivre.grupo4.desafiotesting.model.Property;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
 import com.mercadolivre.grupo4.desafiotesting.service.PropertyService;
 import lombok.AllArgsConstructor;
@@ -7,10 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/property")
@@ -39,6 +37,11 @@ public class PropertyController {
     public ResponseEntity<List<Room>> getAllRoomsArea(@PathVariable Long propertyId) {
         List<Room> roomList = propertyService.calculateAllRoomArea(propertyId);
         return ResponseEntity.ok().body(roomList);
+    }
+
+    @PostMapping
+    public ResponseEntity<Property> createProperty(@RequestBody Property property) {
+        return null;
     }
 
 }

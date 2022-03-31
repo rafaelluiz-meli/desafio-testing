@@ -4,6 +4,7 @@ import com.mercadolivre.grupo4.desafiotesting.model.District;
 import com.mercadolivre.grupo4.desafiotesting.repository.IPropertyRepository;
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
+import com.mercadolivre.grupo4.desafiotesting.repository.PropertyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
@@ -41,6 +42,11 @@ public class PropertyService {
         );
 
         return property.getRoomList();
+    }
+
+    public Property createProperty(Property property) {
+        Property addedProperty = propertyRepository.add(property);
+        return addedProperty;
     }
 }
 
