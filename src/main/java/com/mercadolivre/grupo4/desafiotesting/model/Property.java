@@ -22,12 +22,12 @@ public class Property {
     @Size(max = 30, message = "O comprimento do nome não pode exceder 30 caracteres.")
     private String name;
 
-    @OneToOne
+    @ManyToOne
     @NotBlank
     private District district;
 
 
     @NotEmpty(message = "Room list should not be empty")
-    @OneToMany
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> roomList;
 }
