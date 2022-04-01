@@ -1,5 +1,7 @@
 package com.mercadolivre.grupo4.desafiotesting.service;
 
+import com.mercadolivre.grupo4.desafiotesting.exception.PropertyException;
+import com.mercadolivre.grupo4.desafiotesting.exception.PropertyNotFound;
 import com.mercadolivre.grupo4.desafiotesting.model.District;
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
@@ -41,10 +43,8 @@ public class PropertyService {
 
     public List<Room> calculateAllRoomArea(long propertyId) {
 
-        Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
+        Property property = propertyRepository.findById(propertyId).orElseThrow(() -> new PropertyNotFound(propertyId));
 
-        if(propertyOptional.isPresent()) {
-            Property property = propertyOptional.get();
 
             List<Room> roomList = property.getRoomList();
 
@@ -60,8 +60,6 @@ public class PropertyService {
 
             return property.getRoomList();
 
-        }
-        return null;
     }
 
     public Property createProperty(Property property) {

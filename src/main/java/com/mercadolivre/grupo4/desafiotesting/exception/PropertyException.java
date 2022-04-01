@@ -12,7 +12,7 @@ public class PropertyException extends RuntimeException{
     private final HttpStatus httpStatus;
 
     public PropertyException(String message, HttpStatus httpStatus, ZonedDateTime timestamp){
-        this.errorDTO = new ErrorDTO(this.getClass().getSimpleName(),message, timestamp);
+        this.errorDTO = new ErrorDTO(this.getClass().getSimpleName(), message, timestamp);
         this.httpStatus = httpStatus;
     }
 }

@@ -15,8 +15,7 @@ public class PropertyExceptionController {
 
     @ExceptionHandler(PropertyException.class)
     public ResponseEntity<Object> handleGlobalExceptions(PropertyException e){
-        PropertyException propertyException = new PropertyException(e.getMessage(),e.getHttpStatus(), ZonedDateTime.now());
-        return new ResponseEntity<>(propertyException, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(e.getErrorDTO(), e.getHttpStatus());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
