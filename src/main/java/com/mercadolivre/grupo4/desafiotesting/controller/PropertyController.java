@@ -49,8 +49,8 @@ public class PropertyController {
     }
 
     @GetMapping("/{propertyId}")
-    public ResponseEntity<Property> listAllProperties(@PathVariable Long propertyId) {
-        Property foundProperty = propertyService.findProperty(propertyId);
+    public ResponseEntity<Property> getPropertyById(@PathVariable Long propertyId) {
+        Property foundProperty = propertyService.findByPropertyId(propertyId);
         return ResponseEntity.ok().body(foundProperty);
     }
 

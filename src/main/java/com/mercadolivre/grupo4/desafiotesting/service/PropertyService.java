@@ -65,7 +65,7 @@ public class PropertyService {
         return createdProperty;
     }
 
-    public Property findProperty(Long propertyId) {
+    public Property findByPropertyId(Long propertyId) {
         return propertyRepository.findById(propertyId).orElse(null);
     }
 }

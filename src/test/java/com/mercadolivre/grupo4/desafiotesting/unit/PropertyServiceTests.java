@@ -150,9 +150,21 @@ public class PropertyServiceTests {
 
         //Act(Executar)
         Mockito.when(propertyRepository.save(any())).thenReturn(property);
-        Property savingProperty = propertyService.createProperty(any());
+        Property savedProperty = propertyService.createProperty(any());
 
         //Assert(Verificar)
-        assertEquals(property, savingProperty);
+        assertEquals(property, savedProperty);
+    }
+
+    @Test
+    @DisplayName("Should try to Find a Property by Id.")
+    public void shouldTryToFindAPropertyById(){
+
+        //Act
+        Mockito.when(propertyRepository.findById(any())).thenReturn(propertyOptional);
+        Property findedProperty = propertyService.findByPropertyId(anyLong());
+
+        //Assert
+        assertEquals(propertyOptional.get(), findedProperty);
     }
 }
