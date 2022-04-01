@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/property")
 @AllArgsConstructor
@@ -41,7 +43,7 @@ public class PropertyController {
     }
 
     @PostMapping
-    public ResponseEntity<Property> createProperty(@RequestBody Property property) {
+    public ResponseEntity<Property> createProperty(@Valid @RequestBody Property property) {
         Property addedProperty = propertyService.createProperty(property);
         return ResponseEntity.ok().body(addedProperty);
     }

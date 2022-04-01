@@ -1,5 +1,6 @@
 package com.mercadolivre.grupo4.desafiotesting.unit;
 
+import com.mercadolivre.grupo4.desafiotesting.exception.PropertyNotFound;
 import com.mercadolivre.grupo4.desafiotesting.model.District;
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
@@ -26,8 +27,10 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class PropertyServiceTests {
+
     @Mock
     PropertyRepository propertyRepository;
+
     @Mock
     DistrictRepository districtRepository;
     @Mock
@@ -48,7 +51,10 @@ public class PropertyServiceTests {
     final Room room3 = new Room(3L, "Banheiro", 5.00, 6.00, null);
     final List<Room> rooms = new ArrayList<>(Arrays.asList(room1,room2, room3));
     final Property property = new Property(1L,"Apartamento", district, rooms);
+    final Property propertyNull = new Property();
     final Optional<Property> propertyOptional = Optional.of(property);
+    final Optional<Property> propertyOptionalNull = Optional.empty();
+
 
     @Test
     @DisplayName("Should calculate property value")
@@ -85,6 +91,7 @@ public class PropertyServiceTests {
         assertEquals(330, result);
     }
 
+    @Test
     @DisplayName("Should return the biggest room")
     public void shouldReturnBiggestRoom(){
 
@@ -120,6 +127,21 @@ public class PropertyServiceTests {
         assertEquals(roomsWithCalculatedArea.get(0).getArea(), 100);
         assertEquals(roomsWithCalculatedArea.get(1).getArea(), 200);
         assertEquals(roomsWithCalculatedArea.get(2).getArea(), 30);
+    }
+
+    @Test
+    @DisplayName("Should return error when property not found")
+    public void shouldReturnErrorWhenPropertyNotFound(){
+
+        //Act
+        Mockito.when(propertyRepository.findById(anyLong())).thenReturn(propertyOptionalNull);
+
+        //Assert
+        assertThrows(PropertyNotFound.class,
+                () -> {
+                    propertyService.calculateAllRoomArea(10l);
+                });
+
     }
 
     @Test
