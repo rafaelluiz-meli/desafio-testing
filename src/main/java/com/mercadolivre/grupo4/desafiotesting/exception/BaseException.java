@@ -7,11 +7,11 @@ import org.springframework.http.HttpStatus;
 import java.time.ZonedDateTime;
 
 @Getter
-public class PropertyException extends RuntimeException{
+public class BaseException extends RuntimeException{
     private final ErrorDTO errorDTO;
     private final HttpStatus httpStatus;
 
-    public PropertyException(String message, HttpStatus httpStatus, ZonedDateTime timestamp){
+    public BaseException(String message, HttpStatus httpStatus, ZonedDateTime timestamp){
         this.errorDTO = new ErrorDTO(this.getClass().getSimpleName(), message, timestamp);
         this.httpStatus = httpStatus;
     }

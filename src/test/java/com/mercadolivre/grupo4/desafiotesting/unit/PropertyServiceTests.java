@@ -1,6 +1,5 @@
 package com.mercadolivre.grupo4.desafiotesting.unit;
 
-import com.mercadolivre.grupo4.desafiotesting.exception.PropertyException;
 import com.mercadolivre.grupo4.desafiotesting.exception.PropertyNotFound;
 import com.mercadolivre.grupo4.desafiotesting.model.District;
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
@@ -28,8 +27,10 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class PropertyServiceTests {
+
     @Mock
     PropertyRepository propertyRepository;
+
     @Mock
     DistrictRepository districtRepository;
     @Mock

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 
-public class PropertyNotFound extends PropertyException{
+public class PropertyNotFound extends BaseException {
 
     public PropertyNotFound(long id) {
 
