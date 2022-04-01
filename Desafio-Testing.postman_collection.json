@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "efe950eb-c7e1-4a66-80a8-5793c6b52ef5",
+		"name": "Desafio-Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "NewProperty",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"MelicidadeCX\",\n    \"district\": {\n      \"name\":\"Sao Pedro\",\n      \"valuePerSquareMeter\": 1000\n    },\n    \"roomList\": [\n      {\n        \"name\": \"Sala\",\n        \"width\": 10.0,\n        \"length\": 10.0\n      },\n      {\n        \"name\": \"Banheiro\",\n        \"width\": 10.0,\n        \"length\": 20.0\n      }\n    ]\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/property",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"property"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NewDistrict",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Sao Pedro\",\n    \"valuePerSquareMeter\": 1000.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/district",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"district"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPropertyById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Teste\",\n\"district\": {\n    \"name\":\"Embu\",\n    \"valuePerSquareMeter\": 1000\n},\n\"roomList\": [\n    {\n    \"name\": \"Quarto\",\n    \"width\": 10.0,\n    \"length\": 10.0\n    },\n    {\n    \"name\": \"Cozinha\",\n    \"width\": 10.0,\n    \"length\": 20.0\n    }\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/property/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"property",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBiggestRoomOfProperty",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Teste\",\n\"district\": {\n    \"name\":\"Embu\",\n    \"valuePerSquareMeter\": 1000\n},\n\"roomList\": [\n    {\n    \"name\": \"Quarto\",\n    \"width\": 10.0,\n    \"length\": 10.0\n    },\n    {\n    \"name\": \"Cozinha\",\n    \"width\": 10.0,\n    \"length\": 20.0\n    }\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/property/biggestRoom/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"property",
+						"biggestRoom",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPropertyValue",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Teste\",\n\"district\": {\n    \"name\":\"Embu\",\n    \"valuePerSquareMeter\": 1000\n},\n\"roomList\": [\n    {\n    \"name\": \"Quarto\",\n    \"width\": 10.0,\n    \"length\": 10.0\n    },\n    {\n    \"name\": \"Cozinha\",\n    \"width\": 10.0,\n    \"length\": 20.0\n    }\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/property/value/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"property",
+						"value",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTotalAreaOfProperty",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Teste\",\n\"district\": {\n    \"name\":\"Embu\",\n    \"valuePerSquareMeter\": 1000\n},\n\"roomList\": [\n    {\n    \"name\": \"Quarto\",\n    \"width\": 10.0,\n    \"length\": 10.0\n    },\n    {\n    \"name\": \"Cozinha\",\n    \"width\": 10.0,\n    \"length\": 20.0\n    }\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/property/totalArea/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"property",
+						"totalArea",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTotalRoomsArea",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Teste\",\n\"district\": {\n    \"name\":\"Embu\",\n    \"valuePerSquareMeter\": 1000\n},\n\"roomList\": [\n    {\n    \"name\": \"Quarto\",\n    \"width\": 10.0,\n    \"length\": 10.0\n    },\n    {\n    \"name\": \"Cozinha\",\n    \"width\": 10.0,\n    \"length\": 20.0\n    }\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/property/allRoomsArea/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"property",
+						"allRoomsArea",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
