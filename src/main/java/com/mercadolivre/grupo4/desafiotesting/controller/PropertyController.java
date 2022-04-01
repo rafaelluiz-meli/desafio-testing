@@ -1,7 +1,6 @@
 package com.mercadolivre.grupo4.desafiotesting.controller;
 
 import com.mercadolivre.grupo4.desafiotesting.model.Property;
-import com.mercadolivre.grupo4.desafiotesting.model.PropertyDTO;
 import com.mercadolivre.grupo4.desafiotesting.model.Room;
 import com.mercadolivre.grupo4.desafiotesting.service.PropertyService;
 import lombok.AllArgsConstructor;
@@ -28,6 +27,7 @@ public class PropertyController {
         BigDecimal propertyValue = propertyService.calculatePropertyValue(propertyId);
         return ResponseEntity.ok().body(propertyValue);
     }
+
     @GetMapping("/totalArea/{propertyId}")
     public ResponseEntity<Double> getTotalArea(@PathVariable Long propertyId) {
         Double totalArea = propertyService.calculateTotalArea(propertyId);
@@ -41,14 +41,14 @@ public class PropertyController {
     }
 
     @PostMapping
-    public ResponseEntity<Property> createProperty(@RequestBody PropertyDTO property) {
+    public ResponseEntity<Property> createProperty(@RequestBody Property property) {
         Property addedProperty = propertyService.createProperty(property);
         return ResponseEntity.ok().body(addedProperty);
     }
 
     @GetMapping("/{propertyId}")
-    public ResponseEntity<PropertyDTO> listAllProperties(@PathVariable Long propertyId) {
-        PropertyDTO foundProperty = propertyService.findProperty(propertyId);
+    public ResponseEntity<Property> listAllProperties(@PathVariable Long propertyId) {
+        Property foundProperty = propertyService.findProperty(propertyId);
         return ResponseEntity.ok().body(foundProperty);
     }
 

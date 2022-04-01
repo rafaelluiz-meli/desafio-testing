@@ -18,10 +18,6 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne(targetEntity = Property.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "PROPERTY_ID",insertable = false, updatable = false)
-    private Long property;
-
     @NotEmpty
     @NotBlank(message = "O campo não pode estar vazio.")
 //    @Pattern(regexp="(([A-Z][a-záàâãéèêíïóôõöúçñ]+)\\s).+", message = "O campo deve começar com uma letra maiúscula.")

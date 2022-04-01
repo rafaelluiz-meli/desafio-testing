@@ -3,7 +3,6 @@ package com.mercadolivre.grupo4.desafiotesting.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.List;
@@ -25,6 +24,10 @@ public class Property {
     @ManyToOne(cascade = CascadeType.ALL)
     private District district;
 
+//    Solução do Mauri
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "property_id", nullable = false)
+    private List<Room> roomList;
 
 //    @NotEmpty(message = "Room list should not be empty")
 //    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)

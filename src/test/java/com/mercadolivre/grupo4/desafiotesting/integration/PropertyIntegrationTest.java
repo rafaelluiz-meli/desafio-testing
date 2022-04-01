@@ -21,9 +21,12 @@ public class PropertyIntegrationTest {
     @Autowired
     private MockMvc mvc;
 
+
+
     @Test
     @DisplayName("biggestRoom endpoint should return status OK")
     public void biggestRoomOutput() throws Exception {
+
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .get("/property/biggestRoom/{propertyId}", 1))

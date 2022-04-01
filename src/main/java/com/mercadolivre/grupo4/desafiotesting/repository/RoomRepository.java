@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-    Optional<Room> findByProperty(Long propertyId);
+//    Optional<Room> findByProperty(Long propertyId);
 
-    Optional<List<Room>> findAllByProperty(Long propertyId);
+//    Optional<List<Room>> findAllByProperty(Long propertyId);
 }
