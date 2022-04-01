@@ -55,7 +55,7 @@ public class PropertyService {
                 });
 
                 property.setRoomList(roomList);
-                propertyRepository.save(property);
+                propertyRepository.saveAndFlush(property);
             }
 
             return property.getRoomList();
